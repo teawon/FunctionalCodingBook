@@ -33,3 +33,54 @@ const pluck =
 
 const dataIds = dataArray.map(pluck("address"));
 ```
+
+```javascript
+// groupBy - ECMAScript2024에 추가됨~~
+
+const stationary = [
+  { name: "Pencil", qty: 100 },
+  { name: "Pen", qty: 50 },
+  { name: "Rubber", qty: 300 },
+  { name: "Notebook", qty: 150 },
+  { name: "Scale", qty: 0 },
+  { name: "Color Pencil", qty: 0 },
+];
+function callbackFun({ qty }) {
+  return qty > 0 ? "available" : "notAvailable";
+}
+const result = Object.groupBy(stationary, callbackFun);
+console.log(result);
+
+//output
+/*
+{
+  available: [
+    { name: 'Pencil', qty: 100 },
+    { name: 'Pen', qty: 50 },
+    { name: 'Rubber', qty: 300 },
+    { name: 'Notebook', qty: 150 }
+  ],
+  notAvailable: [
+    { name: 'Scale', qty: 0 },
+    { name: 'Color Pencil', qty: 0 }
+  ]
+}
+*/
+```
+
+// 개인적 메모
+
+- 객체 값을 순회할때는 구조 분해 할당을 통해 값을 꺼내고 처리하면 더 깔끔한듯
+
+```javascript
+var evaluations = recommendations.map((recommendation) => {
+  const { name, position } = recommendation;
+  const score = scorePlayer(name, position); // scorePlayer 함수를 사용하여 점수 계산
+
+  return {
+    name: name,
+    position: position,
+    score: score,
+  };
+});
+```
